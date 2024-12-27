@@ -9,8 +9,10 @@ export default function Search({ placeholder }: { placeholder: string }) {
   const pathname = usePathname();
   const { replace } = useRouter();
 
+  // Using useDebounceCallback to implement debounce technnique to prevent a new database query on every keystroke.
   const handleSearch = useDebouncedCallback((term: string) => {
     const params = new URLSearchParams(searchParams);
+    params.set("page", "1");
     if (term) {
       params.set("query", term);
     } else {
